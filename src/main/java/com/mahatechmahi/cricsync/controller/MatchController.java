@@ -3,6 +3,7 @@ package com.mahatechmahi.cricsync.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import com.mahatechmahi.cricsync.repository.MatchRepository;
 
 @RestController
 @RequestMapping("/api/matches")
+@CrossOrigin(origins = "*")
 public class MatchController {
 
 	@Autowired
@@ -30,4 +32,5 @@ public class MatchController {
 	public List<Match> getAllMatches() {
 		return matchRepository.findAll();
 	}
+
 }
