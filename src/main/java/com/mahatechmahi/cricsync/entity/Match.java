@@ -1,74 +1,75 @@
 package com.mahatechmahi.cricsync.entity;
 
-import java.time.LocalDate;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "matches")
 public class Match {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer matchId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tournament_id")
+    private Tournament tournament;
 
-	private Integer organizerId; // The ID of the user who posted the match
-	private LocalDate matchDate;
-	private String location;
-	private String roleNeeded; // UMPIRE, SCORER, or PLAYER
-	private String status = "OPEN";
+    @Column(name = "team_a", nullable = false, length = 100)
+    private String teamA;
 
-	public Integer getMatchId() {
-		return matchId;
-	}
+    @Column(name = "team_b", nullable = false, length = 100)
+    private String teamB;
 
-	public void setMatchId(Integer matchId) {
-		this.matchId = matchId;
-	}
+    @Column(length = 20)
+    private String status = "UPCOMING";
 
-	public Integer getOrganizerId() {
-		return organizerId;
-	}
+    @Column(name = "runs_a")
+    private Integer runsA = 0;
 
-	public void setOrganizerId(Integer organizerId) {
-		this.organizerId = organizerId;
-	}
+    @Column(name = "wickets_a")
+    private Integer wicketsA = 0;
 
-	public LocalDate getMatchDate() {
-		return matchDate;
-	}
+    @Column(name = "balls_a")
+    private Integer ballsA = 0;
 
-	public void setMatchDate(LocalDate matchDate) {
-		this.matchDate = matchDate;
-	}
+    @Column(name = "runs_b")
+    private Integer runsB = 0;
 
-	public String getLocation() {
-		return location;
-	}
+    @Column(name = "wickets_b")
+    private Integer wicketsB = 0;
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
+    @Column(name = "balls_b")
+    private Integer ballsB = 0;
 
-	public String getRoleNeeded() {
-		return roleNeeded;
-	}
+    @Column(name = "current_innings")
+    private Integer currentInnings = 1;
 
-	public void setRoleNeeded(String roleNeeded) {
-		this.roleNeeded = roleNeeded;
-	}
+    @Column(name = "winner_id", length = 100)
+    private String winnerId;
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	// Generate Getters and Setters (Source -> Generate Getters and Setters)
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public Tournament getTournament() { return tournament; }
+    public void setTournament(Tournament tournament) { this.tournament = tournament; }
+    public String getTeamA() { return teamA; }
+    public void setTeamA(String teamA) { this.teamA = teamA; }
+    public String getTeamB() { return teamB; }
+    public void setTeamB(String teamB) { this.teamB = teamB; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+    public Integer getRunsA() { return runsA; }
+    public void setRunsA(Integer runsA) { this.runsA = runsA; }
+    public Integer getWicketsA() { return wicketsA; }
+    public void setWicketsA(Integer wicketsA) { this.wicketsA = wicketsA; }
+    public Integer getBallsA() { return ballsA; }
+    public void setBallsA(Integer ballsA) { this.ballsA = ballsA; }
+    public Integer getRunsB() { return runsB; }
+    public void setRunsB(Integer runsB) { this.runsB = runsB; }
+    public Integer getWicketsB() { return wicketsB; }
+    public void setWicketsB(Integer wicketsB) { this.wicketsB = wicketsB; }
+    public Integer getBallsB() { return ballsB; }
+    public void setBallsB(Integer ballsB) { this.ballsB = ballsB; }
+    public Integer getCurrentInnings() { return currentInnings; }
+    public void setCurrentInnings(Integer currentInnings) { this.currentInnings = currentInnings; }
+    public String getWinnerId() { return winnerId; }
+    public void setWinnerId(String winnerId) { this.winnerId = winnerId; }
 }

@@ -1,76 +1,43 @@
 package com.mahatechmahi.cricsync.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	// 1. FIELDS (The data we are storing)
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer userId;
+    @Column(nullable = false, unique = true)
+    private String username;
 
-	private String fullName;
-	private String email;
-	private String password;
-	private String userRole; // e.g., PLAYER, ORGANIZER, COMMENTATOR
-	private String specialization; // e.g., Wicket Keeper, Fast Bowler, Kannada Commentary
+    @Column(nullable = false)
+    private String password;
 
-	// 2. CONSTRUCTORS (JPA needs a default one)
-	public User() {
-	}
+    @Column(nullable = false)
+    private String role;
 
-	// 3. GETTERS AND SETTERS (The "Access Doors" for your data)
-	public Integer getUserId() {
-		return userId;
-	}
+    private String skills;
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    @Column(name = "rate_per_match")
+    private Integer ratePerMatch = 0;
 
-	public String getFullName() {
-		return fullName;
-	}
+    @Column(name = "availability_status")
+    private String availabilityStatus = "AVAILABLE";
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getUserRole() {
-		return userRole;
-	}
-
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
-	}
-
-	public String getSpecialization() {
-		return specialization;
-	}
-
-	public void setSpecialization(String specialization) {
-		this.specialization = specialization;
-	}
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
+    public String getSkills() { return skills; }
+    public void setSkills(String skills) { this.skills = skills; }
+    public Integer getRatePerMatch() { return ratePerMatch; }
+    public void setRatePerMatch(Integer ratePerMatch) { this.ratePerMatch = ratePerMatch; }
+    public String getAvailabilityStatus() { return availabilityStatus; }
+    public void setAvailabilityStatus(String availabilityStatus) { this.availabilityStatus = availabilityStatus; }
 }
