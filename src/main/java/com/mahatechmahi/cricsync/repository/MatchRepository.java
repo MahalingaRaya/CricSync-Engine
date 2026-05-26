@@ -9,9 +9,9 @@ import java.util.Optional;
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Long> {
     
-    // 1. Keeps your existing tournament infrastructure working perfectly
+    // 1. Keeps your existing tournament relationship infrastructure working perfectly
     List<Match> findByTournamentId(Long tournamentId);
 
-    // 2. Added to handle the live real-time scoring data stream
-    Optional<Match> findFirstByActiveTrueOrderByIdDesc();
+    // 2. Corrected: Finds the latest running match where status string equals "LIVE"
+    Optional<Match> findFirstByStatusOrderByIdDesc(String status);
 }
