@@ -30,36 +30,36 @@ public class MatchController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 3. New endpoint: Fetch the current running live game for the React Dashboard home feed
+    // 3. Updated endpoint: Fetch the current running live game based on the "LIVE" status string
     @GetMapping("/active")
     public ResponseEntity<Match> getActiveMatch() {
-        return matchRepository.findFirstByActiveTrueOrderByIdDesc()
+        return matchRepository.findFirstByStatusOrderByIdDesc("LIVE")
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 4. Upgraded endpoint: Broadcast a match from the Organizer Form and make it the active game
+    // 4. Upgraded endpoint: Broadcast a match from the Organizer Form and set status to "LIVE"
     @PostMapping("/create")
     public Match createMatch(@RequestBody Match match) {
-        // Automatically find and mark any old running matches as inactive
-        matchRepository.findFirstByActiveTrueOrderByIdDesc().ifPresent(oldMatch -> {
-            oldMatch.setActive(false);
+        // Automatically find and mark any old running matches as "COMPLETED"
+        matchRepository.findFirstByStatusOrderByIdDesc("LIVE").ifPresent(oldMatch -> {
+            oldMatch.setStatus("COMPLETED");
             matchRepository.save(oldMatch);
         });
         
-        // Ensure the brand new match starts fresh and marked as active
-        match.setActive(true);
+        // Ensure the brand new match starts fresh and marked as "LIVE"
+        match.setStatus("LIVE");
         return matchRepository.save(match);
     }
 
-    // 5. New endpoint: Dynamically update scores live from the Scorer keypad buttons
+    // 5. Updated endpoint: Dynamically update scores live using your explicit Team A fields
     @PutMapping("/update")
     public ResponseEntity<Match> updateScore(@RequestParam int runs, @RequestParam int wickets, @RequestParam int balls) {
-        return matchRepository.findFirstByActiveTrueOrderByIdDesc()
+        return matchRepository.findFirstByStatusOrderByIdDesc("LIVE")
                 .map(match -> {
-                    match.setRuns(runs);
-                    match.setWickets(wickets);
-                    match.setBalls(balls);
+                    match.setRunsA(runs);
+                    match.setWicketsA(wickets);
+                    match.setBallsA(balls);
                     Match updated = matchRepository.save(match);
                     return ResponseEntity.ok(updated);
                 })
