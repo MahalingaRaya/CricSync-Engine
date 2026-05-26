@@ -1,10 +1,10 @@
-# Stage 1: Build the application
-FROM maven:3.9.6-eclipse-temurin-21 AS build
+# Stage 1: Build the application using Java 17 to match pom.xml
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Stage 2: Run the application
-FROM eclipse-temurin:21-jdk-alpine
+# Stage 2: Run the application using a lightweight Java 17 runtime
+FROM eclipse-temurin:17-jdk-alpine
 COPY --from=build /target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
