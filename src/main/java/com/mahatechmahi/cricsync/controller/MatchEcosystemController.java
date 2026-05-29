@@ -1,7 +1,12 @@
-package com.cricsync.engine.controller;
+package com.mahatechmahi.cricsync.controller;
 
-import com.cricsync.engine.model.*;
-import com.cricsync.engine.repository.*;
+import com.mahatechmahi.cricsync.entity.Match;
+import com.mahatechmahi.cricsync.entity.CommentaryLog;
+import com.mahatechmahi.cricsync.entity.MarketplaceJob;
+import com.mahatechmahi.cricsync.repository.MatchRepository;
+import com.mahatechmahi.cricsync.repository.CommentaryLogRepository;
+import com.mahatechmahi.cricsync.repository.JobRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +34,6 @@ public class MatchEcosystemController {
         match.setBallsA(balls);
         matchRepository.save(match);
 
-        // Auto-generate bilingual commentary row logs
         CommentaryLog log = new CommentaryLog();
         log.setMatchId(id);
         log.setRunValue(lastBallEvent.equals("W") ? 0 : Integer.parseInt(lastBallEvent));
