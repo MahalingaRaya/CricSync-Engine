@@ -1,0 +1,21 @@
+package com.cricsync.engine.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "commentary_logs")
+@Data
+public class CommentaryLog {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long matchId;
+    private Integer runValue;
+    private Boolean isWicket;
+    private String overDisplay;
+    private String commentaryEn;
+    private String commentaryKn;
+    private LocalDateTime timestamp;
+}
