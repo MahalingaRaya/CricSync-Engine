@@ -22,6 +22,33 @@ public class MatchEcosystemController {
     @Autowired private CommentaryLogRepository commentaryRepository;
     @Autowired private JobRepository jobRepository;
 
+    // 1. FIXED: Added the POST endpoint to handle initial match publishing on the base path
+    @PostMapping
+    public Match createMatch(@RequestBody Match match) {
+        // Enforce basic initializations if missing from payload
+        if (match.getRunsA() == null) match.setRunsA(0);
+        if (match.getWicketsA() == null) match.setWicketsA(0);
+        if (match.getBallsA() == null) match.setBallsA(0);
+        return matchRepository.save(match);
+    }
+
+    // 2. FIXED: Added the active match retriever endpoint requested by your React polling loop
+    @GetMapping("/active")
+    public ResponseEntity<Match> getActiveMatch() {
+        List<Match> matches = matchRepository.findAll();
+        if (matches.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        // Returns the latest active live record entry cleanly
+        return ResponseEntity.ok(matches.get(matches.size() - 1));
+    }
+
+    // 3. FIXED: Added the explicit endpoint to process dynamic job posting requests
+    @PostMapping("/marketplace/create")
+    public MarketplaceJob createNewMarketplaceJob(@RequestBody MarketplaceJob job) {
+        return jobRepository.save(job);
+    }
+
     @PutMapping("/update-live")
     public ResponseEntity<?> updateMatchScore(
             @RequestParam Long id, @RequestParam Integer runs,
