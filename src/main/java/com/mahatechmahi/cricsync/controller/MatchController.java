@@ -36,12 +36,12 @@ public class MatchController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 3. Fetch the current running live game matching your frontend polling layout
+    // 3. FIXED: Handles empty tables gracefully. Returns a safe placeholder if no match is LIVE yet.
     @GetMapping("/active")
-    public ResponseEntity<Match> getActiveMatch() {
+    public ResponseEntity<?> getActiveMatch() {
         return matchRepository.findFirstByStatusOrderByIdDesc("LIVE")
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .<ResponseEntity<?>>map(ResponseEntity::ok)
+                .orElse(ResponseEntity.ok(new Match())); 
     }
 
     // 4. Broadcast a match from the Organizer Form, marking old games COMPLETED
