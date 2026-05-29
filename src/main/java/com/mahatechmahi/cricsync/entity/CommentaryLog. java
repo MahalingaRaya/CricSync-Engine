@@ -17,5 +17,5 @@ public class CommentaryLog {
     private String overDisplay;
     private String commentaryEn;
     private String commentaryKn;
-    private LocalDateTime timestamp;
+    private LocalDateTime timestamp; 
 }
