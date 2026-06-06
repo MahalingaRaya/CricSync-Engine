@@ -1,6 +1,7 @@
 package com.mahatechmahi.cricsync.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "ball_by_ball")
@@ -9,6 +10,7 @@ public class BallByBall {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore // THIS STOPS THE INFINITE LOOP
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "match_id")
     private Match match;
