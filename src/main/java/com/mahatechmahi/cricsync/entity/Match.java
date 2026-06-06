@@ -21,6 +21,17 @@ public class Match {
     @Column(name = "team_b", nullable = false, length = 100)
     private String teamB;
 
+    // --- NEW: TOSS AND VENUE FIELDS ---
+    @Column(length = 150)
+    private String venue;
+
+    @Column(name = "toss_winner", length = 100)
+    private String tossWinner;
+
+    @Column(name = "toss_decision", length = 20)
+    private String tossDecision;
+    // ----------------------------------
+
     @Column(length = 20)
     private String status = "UPCOMING";
 
@@ -54,34 +65,60 @@ public class Match {
     @Column(name = "winner_id", length = 100)
     private String winnerId;
 
+    // --- GETTERS AND SETTERS ---
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+    
     public Tournament getTournament() { return tournament; }
     public void setTournament(Tournament tournament) { this.tournament = tournament; }
+    
     public String getTeamA() { return teamA; }
     public void setTeamA(String teamA) { this.teamA = teamA; }
+    
     public String getTeamB() { return teamB; }
     public void setTeamB(String teamB) { this.teamB = teamB; }
+
+    // --- NEW GETTERS AND SETTERS ---
+    public String getVenue() { return venue; }
+    public void setVenue(String venue) { this.venue = venue; }
+
+    public String getTossWinner() { return tossWinner; }
+    public void setTossWinner(String tossWinner) { this.tossWinner = tossWinner; }
+
+    public String getTossDecision() { return tossDecision; }
+    public void setTossDecision(String tossDecision) { this.tossDecision = tossDecision; }
+    // -------------------------------
+
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    
     public Integer getMaxOvers() { return maxOvers; }
     public void setMaxOvers(Integer maxOvers) { this.maxOvers = maxOvers; }
+    
     public Integer getMaxWickets() { return maxWickets; }
     public void setMaxWickets(Integer maxWickets) { this.maxWickets = maxWickets; }
+    
     public Integer getRunsA() { return runsA; }
     public void setRunsA(Integer runsA) { this.runsA = runsA; }
+    
     public Integer getWicketsA() { return wicketsA; }
     public void setWicketsA(Integer wicketsA) { this.wicketsA = wicketsA; }
+    
     public Integer getBallsA() { return ballsA; }
     public void setBallsA(Integer ballsA) { this.ballsA = ballsA; }
+    
     public Integer getRunsB() { return runsB; }
     public void setRunsB(Integer runsB) { this.runsB = runsB; }
+    
     public Integer getWicketsB() { return wicketsB; }
     public void setWicketsB(Integer wicketsB) { this.wicketsB = wicketsB; }
+    
     public Integer getBallsB() { return ballsB; }
     public void setBallsB(Integer ballsB) { this.ballsB = ballsB; }
+    
     public Integer getCurrentInnings() { return currentInnings; }
     public void setCurrentInnings(Integer currentInnings) { this.currentInnings = currentInnings; }
+    
     public String getWinnerId() { return winnerId; }
     public void setWinnerId(String winnerId) { this.winnerId = winnerId; }
 }
