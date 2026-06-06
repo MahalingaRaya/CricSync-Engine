@@ -1,6 +1,6 @@
 package com.mahatechmahi.cricsync.service;
 
-import com.mahatechmahi.cricsync.entity.Job;
+import com.mahatechmahi.cricsync.entity.MarketplaceJob;
 import com.mahatechmahi.cricsync.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,15 +14,19 @@ public class JobService {
     @Autowired
     private JobRepository jobRepository;
 
-    public Job saveJob(Job job) {
+    public MarketplaceJob saveJob(MarketplaceJob job) {
         return jobRepository.save(job);
     }
 
-    public List<Job> getAllJobs() {
+    public List<MarketplaceJob> getAllJobs() {
         return jobRepository.findAll();
     }
 
-    public Optional<Job> getJobById(Long id) {
+    public Optional<MarketplaceJob> getJobById(Long id) {
         return jobRepository.findById(id);
+    }
+
+    public void deleteJob(Long id) {
+        jobRepository.deleteById(id);
     }
 }
