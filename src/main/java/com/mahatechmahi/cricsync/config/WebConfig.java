@@ -10,7 +10,12 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**") // Allow all paths
-				.allowedOrigins("http://localhost:3000", "http://localhost:5173") // React ports
-				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedHeaders("*");
+				.allowedOrigins(
+                    "http://localhost:3000", 
+                    "http://localhost:5173", 
+                    "https://cricsync.vercel.app" // ALLOWS YOUR LIVE FRONTEND
+                ) 
+				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*");
 	}
 }
