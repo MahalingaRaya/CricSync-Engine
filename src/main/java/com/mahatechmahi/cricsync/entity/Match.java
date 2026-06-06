@@ -22,6 +22,13 @@ public class Match {
     @Column(length = 20)
     private String status = "UPCOMING";
 
+    // DYNAMIC LIMITS: Pass 2, 5, 10, or 20 here when creating a match!
+    @Column(name = "max_overs")
+    private Integer maxOvers = 20;
+
+    @Column(name = "max_wickets")
+    private Integer maxWickets = 10;
+
     @Column(name = "runs_a")
     private Integer runsA = 0;
 
@@ -46,6 +53,7 @@ public class Match {
     @Column(name = "winner_id", length = 100)
     private String winnerId;
 
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public Tournament getTournament() { return tournament; }
@@ -56,6 +64,12 @@ public class Match {
     public void setTeamB(String teamB) { this.teamB = teamB; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    
+    public Integer getMaxOvers() { return maxOvers; }
+    public void setMaxOvers(Integer maxOvers) { this.maxOvers = maxOvers; }
+    public Integer getMaxWickets() { return maxWickets; }
+    public void setMaxWickets(Integer maxWickets) { this.maxWickets = maxWickets; }
+
     public Integer getRunsA() { return runsA; }
     public void setRunsA(Integer runsA) { this.runsA = runsA; }
     public Integer getWicketsA() { return wicketsA; }
