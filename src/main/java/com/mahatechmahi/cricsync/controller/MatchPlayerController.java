@@ -22,4 +22,10 @@ public class MatchPlayerController {
         List<MatchPlayer> savedPlayers = repository.saveAll(players);
         return ResponseEntity.ok(savedPlayers);
     }
+
+    // NEW: Fetches all 22 players for a specific match so React can show them in dropdowns
+    @GetMapping("/match/{matchId}")
+    public ResponseEntity<List<MatchPlayer>> getPlayersByMatch(@PathVariable Long matchId) {
+        return ResponseEntity.ok(repository.findByMatchId(matchId));
+    }
 }
