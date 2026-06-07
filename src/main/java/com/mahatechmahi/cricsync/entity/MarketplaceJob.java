@@ -1,35 +1,47 @@
-package com.mahatechmahi.cricsync.entity; // Updated package path
+package com.mahatechmahi.cricsync.entity;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "marketplace_jobs")
 public class MarketplaceJob {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String roleRequired;
-    private String leagueName;
-    private String venue;
-    private String payPerMatch;
-    private Boolean isFilled = false;
 
-    // Explicit Getters and Setters
+    private String role;
+    private String league;
+    private String location;
+    private String date;
+    private String fee;
+    private String type;
+    
+    @Column(columnDefinition = "boolean default false")
+    private Boolean applied = false;
+
+    // --- GETTERS AND SETTERS ---
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getRoleRequired() { return roleRequired; }
-    public void setRoleRequired(String roleRequired) { this.roleRequired = roleRequired; }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 
-    public String getLeagueName() { return leagueName; }
-    public void setLeagueName(String leagueName) { this.leagueName = leagueName; }
+    public String getLeague() { return league; }
+    public void setLeague(String league) { this.league = league; }
 
-    public String getVenue() { return venue; }
-    public void setVenue(String venue) { this.venue = venue; }
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
 
-    public String getPayPerMatch() { return payPerMatch; }
-    public void setPayPerMatch(String payPerMatch) { this.payPerMatch = payPerMatch; }
+    public String getDate() { return date; }
+    public void setDate(String date) { this.date = date; }
 
-    public Boolean getIsFilled() { return isFilled; }
-    public void setIsFilled(Boolean isFilled) { this.isFilled = isFilled; }
+    public String getFee() { return fee; }
+    public void setFee(String fee) { this.fee = fee; }
+
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
+
+    public Boolean getApplied() { return applied; }
+    public void setApplied(Boolean applied) { this.applied = applied; }
 }
